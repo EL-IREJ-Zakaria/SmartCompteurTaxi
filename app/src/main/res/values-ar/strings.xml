@@ -24,4 +24,5 @@
     <string name="distance">المسافة</string>
     <string name="time">الوقت</string>
     <string name="fare">الأجرة</string>
+    <string name="save">حفظ</string>
 </resources>
