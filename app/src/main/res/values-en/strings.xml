@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Smart Taxi Meter</string>
+    <string name="distance_format">%.2f km</string>
+    <string name="time_format">%d s</string>
+    <string name="fare_format">%.2f</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
+    <string name="profile">Profile</string>
+    <string name="location_permission_rationale">We need location permission to track the trip</string>
+    <string name="location_permission_denied">Location permission denied</string>
+    <string name="my_position">My Position</string>
+    <string name="trip_finished">Trip Finished</string>
+    <string name="name_label">Name: </string>
+    <string name="surname_label">Surname: </string>
+    <string name="age_label">Age: </string>
+    <string name="license_type_label">License Type: </string>
+    <string name="driver_name">Name: Doe</string>
+    <string name="driver_surname">Surname: John</string>
+    <string name="driver_age">Age: 42</string>
+    <string name="driver_license_type">License Type: B</string>
+    <string name="generate_qr_code">Generate QR Code</string>
+    <string name="trip_summary_notification">Fare: %.2f, Distance: %.2f km, Time: %d s</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
+    <string name="fare">Fare</string>
+</resources>

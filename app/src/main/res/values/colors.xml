@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="taxi_yellow">#FFD700</color>
+    <color name="black">#000000</color>
+    <color name="light_gray">#D3D3D3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#007BFF</color>
+    <color name="green">#28A745</color>
+    <color name="light_blue">#E0F7FF</color>
+    <color name="dark_gray">#343A40</color>
+</resources>

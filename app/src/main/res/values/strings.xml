@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">SmartCompteurTaxi</string>
+    <string name="distance_format">%.2f km</string>
+    <string name="time_format">%d s</string>
+    <string name="fare_format">%.2f DH</string>
+    <string name="start">Démarrer</string>
+    <string name="stop">Arrêter</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="profile">Profil</string>
+    <string name="location_permission_rationale">Nous avons besoin de la permission de localisation pour suivre la course</string>
+    <string name="location_permission_denied">Permission de localisation refusée</string>
+    <string name="my_position">Ma position</string>
+    <string name="trip_finished">Course terminée</string>
+    <string name="name_label">Nom: </string>
+    <string name="surname_label">Prénom: </string>
+    <string name="age_label">Âge: </string>
+    <string name="license_type_label">Type de permis: </string>
+    <string name="driver_name">Nom: Doe</string>
+    <string name="driver_surname">Prénom: John</string>
+    <string name="driver_age">Âge: 42</string>
+    <string name="driver_license_type">Type de permis: B</string>
+    <string name="generate_qr_code">Générer le code QR</string>
+    <string name="trip_summary_notification">Tarif: %.2f DH, Distance: %.2f km, Temps: %d s</string>
+    <string name="distance">Distance</string>
+    <string name="time">Temps</string>
+    <string name="fare">Tarif</string>
+</resources>

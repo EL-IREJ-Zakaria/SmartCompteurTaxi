@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">عداد التاكسي الذكي</string>
+    <string name="distance_format">%.2f كم</string>
+    <string name="time_format">%d ث</string>
+    <string name="fare_format">%.2f د.م.</string>
+    <string name="start">ابدأ</string>
+    <string name="stop">توقف</string>
+    <string name="reset">إعادة تعيين</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="location_permission_rationale">نحتاج إلى إذن الموقع لتتبع الرحلة</string>
+    <string name="location_permission_denied">تم رفض إذن الموقع</string>
+    <string name="my_position">موقعي</string>
+    <string name="trip_finished">انتهت الرحلة</string>
+    <string name="name_label">الاسم: </string>
+    <string name="surname_label">اللقب: </string>
+    <string name="age_label">العمر: </string>
+    <string name="license_type_label">نوع الرخصة: </string>
+    <string name="driver_name">الاسم: دو</string>
+    <string name="driver_surname">اللقب: جون</string>
+    <string name="driver_age">العمر: 42</string>
+    <string name="driver_license_type">نوع الرخصة: B</string>
+    <string name="generate_qr_code">إنشاء رمز الاستجابة السريعة</string>
+    <string name="trip_summary_notification">الأجرة: %.2f د.م., المسافة: %.2f كم, الوقت: %d ث</string>
+    <string name="distance">المسافة</string>
+    <string name="time">الوقت</string>
+    <string name="fare">الأجرة</string>
+</resources>
