@@ -5,12 +5,15 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.widget.Button
+import android.util.Log
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.button.MaterialButton
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.concurrent.TimeUnit
@@ -34,8 +37,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
     private lateinit var distanceTextView: TextView
     private lateinit var timeTextView: TextView
     private lateinit var fareTextView: TextView
-    private lateinit var startButton: FloatingActionButton
-    private lateinit var profileButton: Button
+    private lateinit var startButton: MaterialButton
+    private lateinit var profileButton: ImageButton
 
     private var isTripStarted = false
     private var startTime: Long = 0
@@ -50,6 +53,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
     private lateinit var locationCallback: LocationCallback
 
     companion object {
+        private const val TAG = "MainActivity"
         private const val BASE_FARE = 2.50
         private const val PER_KILOMETER_RATE = 1.50
         private const val PER_MINUTE_RATE = 0.50
@@ -128,7 +132,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
         try {
             fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
         } catch (e: SecurityException) {
-            e.printStackTrace()
+            Log.e(TAG, "Location permission not granted.", e)
         }
     }
 
@@ -162,7 +166,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
         }
         handler.post(updateRunnable)
         startLocationUpdates()
-        startButton.setImageResource(R.drawable.ic_stop)
+        updateStartButton(true)
     }
 
     private fun stopTrip() {
@@ -170,7 +174,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
         handler.removeCallbacks(updateRunnable)
         fusedLocationClient.removeLocationUpdates(locationCallback)
         showTripFinishedNotification()
-        startButton.setImageResource(R.drawable.ic_start)
+        updateStartButton(false)
+    }
+
+    private fun updateStartButton(isStarted: Boolean) {
+        if (isStarted) {
+            startButton.text = getString(R.string.stop)
+            startButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.red))
+        } else {
+            startButton.text = getString(R.string.start)
+            startButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green))
+        }
     }
 
     private fun updateUI() {
@@ -210,14 +224,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
     }
 
     private fun setMapStyle() {
-        val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-            try {
-                val style = MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style_dark)
-                mMap.setMapStyle(style)
-            } catch (e: Exception) {
-                e.printStackTrace()
+        try {
+            val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            val isNightMode = nightModeFlags == Configuration.UI_MODE_NIGHT_YES
+
+            val style = if (isNightMode) {
+                MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style_dark)
+            } else {
+                null // Use default map style in day mode
             }
+            val success = mMap.setMapStyle(style)
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.")
+            }
+        } catch (e: Resources.NotFoundException) {
+            Log.e(TAG, "Can't find style. Error: ", e)
         }
     }
 }
