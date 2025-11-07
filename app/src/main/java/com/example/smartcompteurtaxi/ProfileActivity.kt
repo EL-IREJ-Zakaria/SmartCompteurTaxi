@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -19,7 +21,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var nameEditText: TextInputEditText
     private lateinit var surnameEditText: TextInputEditText
     private lateinit var ageEditText: TextInputEditText
-    private lateinit var licenseTypeEditText: TextInputEditText
+    private lateinit var licenseTypeAutoComplete: AutoCompleteTextView
     private lateinit var saveButton: Button
     private lateinit var qrCodeImageView: ImageView
     private lateinit var generateQrButton: Button
@@ -35,11 +37,12 @@ class ProfileActivity : AppCompatActivity() {
         nameEditText = findViewById(R.id.name_edittext)
         surnameEditText = findViewById(R.id.surname_edittext)
         ageEditText = findViewById(R.id.age_edittext)
-        licenseTypeEditText = findViewById(R.id.license_type_edittext)
+        licenseTypeAutoComplete = findViewById(R.id.license_type_autocomplete)
         saveButton = findViewById(R.id.save_button)
         qrCodeImageView = findViewById(R.id.qr_code_imageview)
         generateQrButton = findViewById(R.id.generate_qr_button)
 
+        setupLicenseTypeDropdown()
         loadProfileData()
 
         saveButton.setOnClickListener {
@@ -51,12 +54,18 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupLicenseTypeDropdown() {
+        val licenseTypes = resources.getStringArray(R.array.license_types_array)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, licenseTypes)
+        licenseTypeAutoComplete.setAdapter(adapter)
+    }
+
     private fun loadProfileData() {
         val sharedPref = getSharedPreferences("profile", Context.MODE_PRIVATE)
         nameEditText.setText(sharedPref.getString("name", ""))
         surnameEditText.setText(sharedPref.getString("surname", ""))
         ageEditText.setText(sharedPref.getString("age", ""))
-        licenseTypeEditText.setText(sharedPref.getString("licenseType", ""))
+        licenseTypeAutoComplete.setText(sharedPref.getString("licenseType", ""), false)
     }
 
     private fun saveProfileData() {
@@ -65,7 +74,7 @@ class ProfileActivity : AppCompatActivity() {
             putString("name", nameEditText.text.toString())
             putString("surname", surnameEditText.text.toString())
             putString("age", ageEditText.text.toString())
-            putString("licenseType", licenseTypeEditText.text.toString())
+            putString("licenseType", licenseTypeAutoComplete.text.toString())
             apply()
         }
         Toast.makeText(this, "Profil enregistré", Toast.LENGTH_SHORT).show()
@@ -83,9 +92,9 @@ class ProfileActivity : AppCompatActivity() {
         val driverInfo = "${nameEditText.text}\n" +
                 "${surnameEditText.text}\n" +
                 "${ageEditText.text}\n" +
-                licenseTypeEditText.text.toString()
+                licenseTypeAutoComplete.text.toString()
 
-        if (driverInfo.isBlank()) {
+        if (nameEditText.text.toString().isBlank() || surnameEditText.text.toString().isBlank() || ageEditText.text.toString().isBlank() || licenseTypeAutoComplete.text.toString().isBlank()) {
             Toast.makeText(this, "Veuillez remplir les informations du profil", Toast.LENGTH_SHORT).show()
             return
         }

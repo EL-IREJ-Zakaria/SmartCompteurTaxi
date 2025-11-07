@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
         startButton = findViewById(R.id.start_button)
         profileButton = findViewById(R.id.profile_button)
 
-        startButton.setOnClickListener { toggleTripState() }
+        startButton.setOnClickListener { animateAndToggleTripState() }
         profileButton.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
@@ -91,6 +92,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, EasyPermissions.Pe
             }
         }
         updateUI()
+    }
+
+    private fun animateAndToggleTripState() {
+        startButton.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
+            toggleTripState()
+            startButton.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+        }.start()
     }
 
     private fun toggleTripState() {

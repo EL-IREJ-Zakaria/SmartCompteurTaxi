@@ -11,10 +11,10 @@
     <string name="location_permission_denied">Permission de localisation refusée</string>
     <string name="my_position">Ma position</string>
     <string name="trip_finished">Course terminée</string>
-    <string name="name_label">Nom: </string>
-    <string name="surname_label">Prénom: </string>
-    <string name="age_label">Âge: </string>
-    <string name="license_type_label">Type de permis: </string>
+    <string name="name_label">Nom</string>
+    <string name="surname_label">Prénom</string>
+    <string name="age_label">Âge</string>
+    <string name="license_type_label">Type de permis</string>
     <string name="driver_name">Nom: Doe</string>
     <string name="driver_surname">Prénom: John</string>
     <string name="driver_age">Âge: 42</string>
@@ -25,4 +25,11 @@
     <string name="time">Temps</string>
     <string name="fare">Tarif</string>
     <string name="save">Enregistrer</string>
+    <string-array name="license_types_array">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
 </resources>
